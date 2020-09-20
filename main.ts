@@ -53,7 +53,7 @@ if (hasName(anyValue)) {
   console.log(anyValue.name);
 }
 
-// multi type varoables
+// Composing Types
 
 let multiType: number | boolean;
 
@@ -71,3 +71,57 @@ const add = (num1: number = 4, num2?: number): number => num1 + num2;
 // both will works because the optional
 add(3); // the other will treated as undified and you can handle it in the functions
 add(3, 2);
+
+// interface
+interface Person {
+  firstName: string;
+  lastName: string;
+}
+
+const fullName = (person: Person) => {
+  console.log(`${person.firstName} ${person.lastName}`);
+};
+
+let p = {
+  firstName: 'Sam',
+  lastName: 'Fisher',
+};
+
+fullName(p);
+
+// class
+
+class Employee {
+  // private employeeName: string; // private and only accessible within class
+  // protected employeeName: string; // protected and only accessible within class 'Employee' and its subclasses.
+  public employeeName: string; // or without public would work as public
+
+  constructor(name: string) {
+    this.employeeName = name;
+  }
+
+  greet() {
+    console.log(`Hello ${this.employeeName}`);
+  }
+}
+
+let emp1 = new Employee('Ali');
+
+emp1.greet();
+console.log(emp1.employeeName);
+
+class Manager extends Employee {
+  constructor(managerName: string) {
+    super(managerName);
+  }
+
+  assignTask() {
+    console.log(`manager assigning task!`);
+  }
+}
+
+let man1 = new Manager('Sam');
+
+man1.assignTask();
+man1.greet();
+console.log(man1.employeeName);

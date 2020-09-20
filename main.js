@@ -1,4 +1,17 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 exports.__esModule = true;
 // starting
 var message = 'Hello Ali!';
@@ -39,7 +52,7 @@ function hasName(obj) {
 if (hasName(anyValue)) {
     console.log(anyValue.name);
 }
-// multi type varoables
+// Composing Types
 var multiType;
 multiType = 2;
 multiType = true;
@@ -54,3 +67,38 @@ var add = function (num1, num2) {
 // both will works because the optional
 add(3); // the other will treated as undified and you can handle it in the functions
 add(3, 2);
+var fullName = function (person) {
+    console.log(person.firstName + " " + person.lastName);
+};
+var p = {
+    firstName: 'Sam',
+    lastName: 'Fisher'
+};
+fullName(p);
+// class
+var Employee = /** @class */ (function () {
+    function Employee(name) {
+        this.employeeName = name;
+    }
+    Employee.prototype.greet = function () {
+        console.log("Hello " + this.employeeName);
+    };
+    return Employee;
+}());
+var emp1 = new Employee('Ali');
+emp1.greet();
+console.log(emp1.employeeName);
+var Manager = /** @class */ (function (_super) {
+    __extends(Manager, _super);
+    function Manager(managerName) {
+        return _super.call(this, managerName) || this;
+    }
+    Manager.prototype.assignTask = function () {
+        console.log("manager assigning task!");
+    };
+    return Manager;
+}(Employee));
+var man1 = new Manager('Sam');
+man1.assignTask();
+man1.greet();
+console.log(man1.employeeName);
